@@ -2,11 +2,15 @@ package com.example.fruit.controller;
 
 import com.example.fruit.entity.Fruit;
 import com.example.fruit.service.FruitService;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/fruit")
 public class FruitController {
@@ -23,7 +27,7 @@ public class FruitController {
     }
 
     @GetMapping("/{id}")
-    public Fruit get(@PathVariable long id){
+    public Fruit get(@Positive @PathVariable long id){
         return fruitService.getById(id);
     }
 
@@ -33,7 +37,7 @@ public class FruitController {
     }
 
     @PostMapping("/")
-    public Fruit save(@RequestBody Fruit fruit){
+    public Fruit save(@Validated @RequestBody Fruit fruit){
         return fruitService.save(fruit);
     }
 
@@ -43,7 +47,7 @@ public class FruitController {
     }
 
     @DeleteMapping("/{id}")
-    public Fruit delete(@PathVariable long id){
+    public Fruit delete(@Size(min= 2, max= 45) @PathVariable long id){
        return fruitService.delete(id);
     }
 }

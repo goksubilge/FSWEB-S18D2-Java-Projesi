@@ -1,6 +1,7 @@
 package com.example.fruit.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Fruit extends Plant {
     @Enumerated(EnumType.STRING)
     @Column(name="fruit_type")
-private FruitType fruitType;
+    @NotNull
+    private FruitType fruitType;
 
 }
