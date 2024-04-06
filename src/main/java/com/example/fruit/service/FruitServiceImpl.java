@@ -1,8 +1,10 @@
 package com.example.fruit.service;
 
 import com.example.fruit.entity.Fruit;
+import com.example.fruit.exceptions.PlantException;
 import com.example.fruit.repositoy.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,9 @@ private FruitRepository fruitRepository;
         if(fruitOptional.isPresent()){
             return fruitOptional.get();
         }
-        // TODO throws exception
-        return null;
+        // throws exception
+        throw new PlantException("Plant with given id is not exist: " + id , HttpStatus.NOT_FOUND);
+        //return null;
     }
 
     @Override
@@ -49,10 +52,10 @@ private FruitRepository fruitRepository;
     @Override
     public Fruit delete(long id) {
         Fruit fruit = getById(id);
-        if(fruit != null){
+
             fruitRepository.delete(fruit);
-        }
-        // TODO throws exception
-        return null;
+
+        // throws exception => Id yi bulamazsa getById 'den hata atacak zaten. Koşullu ifadeyi sildim burada.
+        return fruit;
     }
 }
