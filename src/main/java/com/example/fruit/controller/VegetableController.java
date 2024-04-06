@@ -1,7 +1,10 @@
 package com.example.fruit.controller;
 
+import com.example.fruit.dto.VegetableResponseList;
+import com.example.fruit.dto.VegetableResponseObj;
 import com.example.fruit.entity.Vegetable;
 import com.example.fruit.service.VegetableService;
+import com.example.fruit.util.VegetableResponseConverter;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +29,15 @@ public class VegetableController {
     }
 
     @GetMapping("/{id}")
-    public Vegetable get(@Positive @PathVariable long id){
-        return vegetableService.getById(id);
+    public VegetableResponseObj get(@Positive @PathVariable long id){
+        return new VegetableResponseObj("Success", vegetableService.getById(id));
+        // eski hali: return vegetableService.getById(id);
     }
 
     @GetMapping("/desc")
-    public List<Vegetable> getByDesc(){
-        return vegetableService.getByPriceDesc();
+    public List<VegetableResponseList> getByDesc(){
+        List<Vegetable> vegetables = vegetableService.getByPriceDesc();
+        return VegetableResponseConverter.vegetableToVegetableResponse(vegetables);
     }
 
     @PostMapping("/")
