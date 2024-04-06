@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="fsweb", schema="fruit")
+@Table(name="fruit", schema="fsweb")
 public class Fruit extends Plant {
     @Enumerated(EnumType.STRING)
     @Column(name="fruit_type")

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="fsweb", schema="vegetable")
+@Table(name="vegetable", schema="fsweb")
 public class Vegetable extends Plant {
     @Column(name="is_grown_on_tree")
 private boolean isGrownOnTree;
