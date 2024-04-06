@@ -14,6 +14,6 @@ public interface FruitRepository extends JpaRepository<Fruit, Long > {
     @Query(value = "SELECT f.id, f.name, f.price, f.fruit_type FROM fsweb.fruit AS f " + "ORDER BY f.price ASC", nativeQuery = true)
     List<Fruit> getByPriceAsc ();
 
-    @Query(value = "SELECT f.id, f.name FROM fsweb.fruit AS f " + "WHERE f.name ILIKE %:name%", nativeQuery = true)
+    @Query(value = "SELECT f.id, f.name, f.price, f.fruit_type FROM fsweb.fruit AS f " + "WHERE f.name ILIKE %:name%", nativeQuery = true)
     List<Fruit> searchByName (String name);
 }
